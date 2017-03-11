@@ -10,7 +10,10 @@ def index():
     return send_file('templates/index.html')
 
 
-app.add_url_rule('/notes/', view_func=NoteView.as_view('notes'))
+# TODO: Register the API according to http://flask.pocoo.org/docs/0.12/views/ !
+app.add_url_rule('/notes/<int:note_id>', view_func=NoteView.as_view('notes'), methods=['GET', 'PUT', 'DELETE'])
+
+
 app.add_url_rule('/tags/', view_func=TagView.as_view('tags'))
 
 

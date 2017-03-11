@@ -1,7 +1,9 @@
 'use strict';
 
 var notte = angular.module('notte', [
-    'ngRoute'
+    'ngRoute',
+    'noteControllers',
+    'noteServices'
 ]);
 
 notte.config(
@@ -10,8 +12,9 @@ notte.config(
             when('/', {
                 redirectTo: '/about'
             }).
-            when('/notes', {
-                templateUrl: '/static/partials/notes.html'
+            when('/notes/:id', {
+                templateUrl: '/static/partials/notes.html',
+                controller: 'NoteViewController'
             }).
             when('/about', {
                 templateUrl: '/static/partials/about.html'

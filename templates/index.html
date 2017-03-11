@@ -2,10 +2,14 @@
 
 <html>
     <head>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.min.js"></script>
-        <script src="http://code.angularjs.org/1.5.3/angular-route.min.js"></script>
+        <!-- TODO: Use the minified version for production use! -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.3/angular.js"></script>
+        <script src="http://code.angularjs.org/1.5.3/angular-route.js"></script>
+        <script src="http://code.angularjs.org/1.5.3/angular-resource.js"></script>
 
         <script src="/static/js/app.js"></script>
+        <script src="/static/js/controllers.js"></script>
+        <script src="/static/js/services.js"></script>
     </head>
     <body data-ng-app="notte">
         <div data-ng-view></div>
