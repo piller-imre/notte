@@ -12,18 +12,24 @@ notte.config(
             when('/', {
                 redirectTo: '/about'
             }).
-            when('/notes/:id', {
-                templateUrl: '/static/partials/notes.html',
-                controller: 'NoteViewController'
-            }).
             when('/about', {
                 templateUrl: '/static/partials/about.html'
             }).
-            when('/create-note', {
-                templateUrl: '/static/partials/note-create.html'
+            when('/show-note/:id', {
+                templateUrl: '/static/partials/note-show.html',
+                controller: 'NoteShowController'
             }).
-            when('/edit-note', {
-                templateUrl: '/static/partials/note-edit.html'
+            when('/create-note', {
+                templateUrl: '/static/partials/note-create.html',
+                controller: 'NoteCreateController'
+            }).
+            when('/edit-note/:id', {
+                templateUrl: '/static/partials/note-edit.html',
+                controller: 'NoteEditController'
+            }).
+            when('/list-notes/:id', {
+                templateUrl: '/static/partials/note-list.html',
+                controller: 'NoteListController'
             }).
             otherwise({
                 redirectTo: '/about'
