@@ -17,17 +17,17 @@ notte.config(
             }).
             when('/show-note/:id', {
                 templateUrl: '/static/partials/note-show.html',
-                controller: 'NoteShowController'
+                controller: 'NoteController'
             }).
             when('/create-note', {
                 templateUrl: '/static/partials/note-create.html',
-                controller: 'NoteCreateController'
+                controller: 'NoteController'
             }).
             when('/edit-note/:id', {
                 templateUrl: '/static/partials/note-edit.html',
-                controller: 'NoteEditController'
+                controller: 'NoteController'
             }).
-            when('/list-notes/:id', {
+            when('/list-notes', {
                 templateUrl: '/static/partials/note-list.html',
                 controller: 'NoteListController'
             }).

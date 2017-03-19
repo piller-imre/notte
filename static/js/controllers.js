@@ -4,49 +4,75 @@
 
 var noteControllers = angular.module('noteControllers', []);
 
-noteControllers.controller('NoteShowController',
-    ['$scope', '$routeParams', 'Note',
-    function NoteShowController($scope, $routeParams, Note)
+noteControllers.controller('NoteController',
+    ['$scope', '$routeParams', '$location', 'Note',
+    function NoteController($scope, $routeParams, $location, Note)
     {
+        $scope.emptyNote = {
+            "description": "",
+            "tags": ""
+        };
+
+        $scope.setModel = function(response)
+        {
+            $scope.note = response;
+            console.log("success: " + JSON.stringify(response));
+        };
+
+        $scope.redirectToShow = function(response)
+        {
+            console.log("success: " + JSON.stringify(response));
+            var noteId = response["id"];
+            $location.path('/show-note/' + noteId);
+        };
+
+        $scope.redirectToList = function(response)
+        {
+            console.log("success: " + JSON.stringify(response));
+            $location.path('/list-notes');
+        };
+
+        $scope.errorHandler = function(errorMessage)
+        {
+            console.log("error: " + JSON.stringify(errorMessage));
+        };
+
+        $scope.show = function(noteId)
+        {
+            Note.get({"id": noteId}, $scope.setModel, $scope.errorHandler);
+        };
+
+        $scope.create = function(note)
+        {
+            Note.create($scope.redirectToShow, $scope.errorHandler);
+        };
+
+        $scope.update = function(note)
+        {
+            Note.update($scope.redirectToShow, $scope.errorHandler);
+        };
+
+        $scope.remove = function(noteId)
+        {
+            note.remove({"id": noteId}, $scope.redirectToList, $scope.errorHandler);
+        };
+
         var noteId = $routeParams.id;
-        Note.get(
-            {"id": noteId},
-            function success(response)
-            {
-                $scope.description = response.description;
-                $scope.tags = response.tags;
-                console.log("success: " + JSON.stringify(response));
-            },
-            function error(errorResponse)
-            {
-                console.log("error: " + JSON.stringify(errorResponse));
-            }
-        );
+        if (noteId) {
+            $scope.show(noteId);
+        }
+        else {
+            $scope.note = $scope.emptyNote;
+        }
     }
     ]
 );
 
-noteControllers.controller('NoteCreateController',
+noteControllers.controller('NoteListController',
     ['$scope', '$location', 'Notes',
-    function NoteCreateController($scope, $location, Notes)
+    function NoteListController($scope, $location, Notes)
     {
-        console.log("Init create controller ...");
-        $scope.createNote = function()
-        {
-            console.log("Create new note ...");
-            Notes.add(
-                function success(response)
-                {
-                    console.log("success: " + JSON.stringify(response));
-                    var noteId = response["id"];
-                    $location.path('/show-note/' + noteId);
-                },
-                function error(errorResponse)
-                {
-                    console.log("error: " + JSON.stringify(errorResponse));
-                }
-            );
-        }
+        console.log("List the notes ...");
     }
     ]
 );
