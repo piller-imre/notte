@@ -1,38 +1,40 @@
 'use strict';
 
 var notte = angular.module('notte', [
-    'ngRoute',
+    'ui.router',
     'noteControllers',
     'noteServices'
 ]);
 
 notte.config(
-    ['$routeProvider', function($routeProvider) {
-        $routeProvider.
-            when('/', {
-                redirectTo: '/about'
-            }).
-            when('/about', {
+    // TODO: Use the urlProvider or urlRouterProvider!
+    ['$stateProvider', function($stateProvider) {
+        // $urlProvider.otherwise('/about');
+        // TODO: Add the missing / path!
+        $stateProvider.
+            state('about', {
+                url: '/about',
                 templateUrl: '/static/partials/about.html'
             }).
-            when('/show-note/:id', {
+            state('show-note', {
+                url: '/show-note/:id',
                 templateUrl: '/static/partials/note-show.html',
                 controller: 'NoteController'
             }).
-            when('/create-note', {
+            state('create-note', {
+                url: '/create-note',
                 templateUrl: '/static/partials/note-create.html',
                 controller: 'NoteController'
             }).
-            when('/edit-note/:id', {
+            state('edit-note', {
+                url: '/edit-note/:id',
                 templateUrl: '/static/partials/note-edit.html',
                 controller: 'NoteController'
             }).
-            when('/list-notes', {
+            state('list-notes', {
+                url: '/list-notes',
                 templateUrl: '/static/partials/note-list.html',
                 controller: 'NoteListController'
-            }).
-            otherwise({
-                redirectTo: '/about'
             });
     }]
 );

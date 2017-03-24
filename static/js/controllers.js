@@ -5,8 +5,8 @@
 var noteControllers = angular.module('noteControllers', []);
 
 noteControllers.controller('NoteController',
-    ['$scope', '$routeParams', '$location', 'Note',
-    function NoteController($scope, $routeParams, $location, Note)
+    ['$scope', '$stateParams', '$location', 'Note',
+    function NoteController($scope, $stateParams, $location, Note)
     {
         $scope.emptyNote = {
             "description": "",
@@ -57,7 +57,7 @@ noteControllers.controller('NoteController',
             note.remove({"id": noteId}, $scope.redirectToList, $scope.errorHandler);
         };
 
-        var noteId = $routeParams.id;
+        var noteId = $stateParams.id;
         if (noteId) {
             $scope.show(noteId);
         }
