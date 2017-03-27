@@ -7,10 +7,8 @@ var notte = angular.module('notte', [
 ]);
 
 notte.config(
-    // TODO: Use the urlProvider or urlRouterProvider!
-    ['$stateProvider', function($stateProvider) {
-        // $urlProvider.otherwise('/about');
-        // TODO: Add the missing / path!
+    ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/about');
         $stateProvider.
             state('about', {
                 url: '/about',
