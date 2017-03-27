@@ -44,17 +44,20 @@ noteControllers.controller('NoteController',
 
         $scope.create = function(note)
         {
-            Note.create($scope.redirectToShow, $scope.errorHandler);
+            Note.create(note, $scope.redirectToShow, $scope.errorHandler);
         };
 
         $scope.update = function(note)
         {
-            Note.update($scope.redirectToShow, $scope.errorHandler);
+            Note.update({"id": noteId}, note, $scope.redirectToShow, $scope.errorHandler);
         };
 
-        $scope.remove = function(noteId)
+        $scope.remove = function(note)
         {
-            note.remove({"id": noteId}, $scope.redirectToList, $scope.errorHandler);
+            var confirmed = confirm("Would you like to remove '" + note.description + "'?");
+            if (confirmed) {
+                Note.remove({"id": note.id}, $scope.redirectToList, $scope.errorHandler);
+            }
         };
 
         var noteId = $stateParams.id;
@@ -72,6 +75,18 @@ noteControllers.controller('NoteListController',
     ['$scope', '$location', 'Notes',
     function NoteListController($scope, $location, Notes)
     {
+        $scope.showList = function(response)
+        {
+            $scope.notes = response;
+        };
+
+        $scope.errorHandler = function(errorMessage)
+        {
+            console.log("list error: " + JSON.stringify(errorMessage));
+        };
+
+        Notes.list($scope.showList, $scope.errorHandler);
+
         console.log("List the notes ...");
     }
     ]

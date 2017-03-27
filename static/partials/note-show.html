@@ -4,3 +4,15 @@
     <div><b>description</b>: {{ note.description }}</div>
     <div><b>tags</b>: {{ note.tags }}</div>
 </div>
+
+<div>
+    <a ui-sref="edit-note({'id': note.id})">Edit</a>
+</div>
+
+<div>
+    <a data-ng-click="remove(note)">Remove</a>
+</div>
+
+<div>
+    <a ui-sref="list-notes">Back to list</a>
+</div>

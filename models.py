@@ -12,12 +12,16 @@ class Note(db.Model):
     description = db.Column(db.String)
     tags = db.Column(db.String)
 
-    def to_json(self):
-        """Returns with the JSON representation of the note"""
+    def to_dict(self):
+        """Returns with the dictionary representation of the note"""
         fields = {
             'id': self.id,
             'location': self.location,
             'description': self.description,
             'tags': self.tags
         }
-        return json.dumps(fields)
+        return fields
+
+    def to_json(self):
+        """Returns with the JSON representation of the note"""
+        return json.dumps(self.to_dict())

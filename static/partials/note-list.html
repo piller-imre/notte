@@ -1,5 +1,20 @@
 <h1>Notes</h1>
 
 <div>
+    <a ui-sref="create-note">Create new note</a>
+</div>
+
+<div>
     The list of previous notes.
+</div>
+
+<div>
+    <ul>
+        <li data-ng-repeat="note in notes">
+            <a ui-sref="show-note({'id': note.id})">{{ note.description }}</a>
+            <ul>
+                <li data-ng-repeat="tag in note.tags">{{ tag }}</li>
+            </ul>
+        </li>
+    </ul>
 </div>

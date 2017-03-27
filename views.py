@@ -2,24 +2,47 @@ import json
 from flask import request
 from flask.views import MethodView
 
+from models import db
+from models import Note
+
 
 class NoteView(MethodView):
 
-    def get(self, note_id):
+    def get(self, note_id=None):
         if note_id is None:
-            return 'List of the notes'
+            note_results = Note.query.all()
+            notes = [note.to_dict() for note in note_results]
+            return json.dumps(notes)
         else:
-            note = {
-                'id': note_id,
-                'description': 'sample note',
-                'tags': 'tags for testing'
-            }
-            return json.dumps(note)
+            note = Note.query.filter(Note.id == note_id).one()
+            return note.to_json()
 
     def post(self):
-        print(request.form)
+        note = Note(location='test', **request.json)
+        db.session.add(note)
+        db.session.commit()
         result = {
-            'id': 1234
+            'id': note.id
+        }
+        return json.dumps(result)
+
+    def put(self, note_id):
+        note = Note.query.filter(Note.id == note_id).one()
+        note.description = request.json['description']
+        note.tags = request.json['tags']
+        db.session.add(note)
+        db.session.commit()
+        result = {
+            'id': note.id
+        }
+        return json.dumps(result)
+
+    def delete(self, note_id):
+        note = Note.query.filter(Note.id == note_id).one()
+        db.session.delete(note)
+        db.session.commit()
+        result = {
+            'id': note_id
         }
         return json.dumps(result)
 
