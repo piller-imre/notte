@@ -6,6 +6,27 @@ var notte = angular.module('notte', [
     'noteServices'
 ]);
 
+notte.factory('tokenInterceptor', [
+    function()
+    {
+        var tokenInterceptor = {
+            request: function(config)
+            {
+                config.headers.authorization = 'Token ' + Math.random();
+                return config;
+            }
+        };
+        return tokenInterceptor;
+    }
+]);
+
+notte.config(['$httpProvider',
+    function($httpProvider)
+    {
+        $httpProvider.interceptors.push('tokenInterceptor');
+    }
+]);
+
 notte.config(
     ['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/about');
