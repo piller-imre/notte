@@ -60,6 +60,31 @@ noteControllers.controller('NoteController',
             }
         };
 
+        $scope.enableTokenField = function()
+        {
+            var engine = new Bloodhound({
+                local: [{
+                    value: 'first'
+                }, {
+                    value: 'second'
+                }, {
+                    value: 'third'
+                }],
+                datumTokenizer: function(d) {
+                    return Bloodhound.tokenizers.whitespace(d.value);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace
+            });
+
+            engine.initialize();
+
+            $('#tokenfield-typeahead').tokenfield({
+                typeahead: [null, {
+                    source: engine.ttAdapter()
+                }]
+            });
+        };
+
         var noteId = $stateParams.id;
         if (noteId) {
             $scope.show(noteId);

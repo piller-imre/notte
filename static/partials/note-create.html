@@ -2,7 +2,7 @@
 
 <div>
     <form>
-        <div data-ng-include="'/static/partials/forms/note.html'"></div>
+        <div data-ng-include="'/static/partials/forms/note.html'" onload="enableTokenField()"></div>
     </form>
     <a data-ng-click="create(note)">create new note</a>
     <a ui-sref="list-notes">Cancel</a>
