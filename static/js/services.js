@@ -22,3 +22,14 @@ noteServices.factory('Notes', ['$resource',
         });
     }
 ]);
+
+var tagServices = angular.module('tagServices', ['ngResource']);
+
+tagServices.factory('Tags', ['$resource',
+    function($resource)
+    {
+        return $resource("tags", {}, {
+            list: {method: 'GET', cache: false, isArray: true}
+        });
+    }
+]);

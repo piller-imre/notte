@@ -3,7 +3,9 @@
 var notte = angular.module('notte', [
     'ui.router',
     'noteControllers',
-    'noteServices'
+    'noteServices',
+    'tagControllers',
+    'tagServices'
 ]);
 
 notte.factory('tokenInterceptor', [
@@ -54,6 +56,11 @@ notte.config(
                 url: '/list-notes',
                 templateUrl: '/static/partials/note-list.html',
                 controller: 'NoteListController'
+            }).
+            state('list-tags', {
+                url: '/list-tags',
+                templateUrl: '/static/partials/tag-list.html',
+                controller: 'TagListController'
             });
     }]
 );

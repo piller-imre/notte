@@ -91,3 +91,26 @@ noteControllers.controller('NoteListController',
     }
     ]
 );
+
+var tagControllers = angular.module('tagControllers', []);
+
+tagControllers.controller('TagListController',
+    ['$scope', '$location', 'Tags',
+    function TagListController($scope, $location, Tags)
+    {
+        $scope.showList = function(response)
+        {
+            $scope.tags = response;
+        };
+
+        $scope.errorHandler = function(errorMessage)
+        {
+            console.log("list error: " + JSON.stringify(errorMessage));
+        };
+
+        Tags.list($scope.showList, $scope.errorHandler);
+
+        console.log("List the tags ...");
+    }
+    ]
+);

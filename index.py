@@ -15,7 +15,7 @@ app.add_url_rule('/notes', view_func=NoteView.as_view('notes'), methods=['GET', 
 app.add_url_rule('/notes/<int:note_id>', view_func=NoteView.as_view('note'), methods=['GET', 'PUT', 'DELETE'])
 
 
-app.add_url_rule('/tags/', view_func=TagView.as_view('tags'))
+app.add_url_rule('/tags', view_func=TagView.as_view('tags'), methods=['GET'])
 
 
 if __name__ == '__main__':

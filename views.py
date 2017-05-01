@@ -49,5 +49,13 @@ class NoteView(MethodView):
 
 class TagView(MethodView):
 
-    def get(self):
-        return 'List of the tags'
+    def get(self, tag_id=None):
+        if tag_id is None:
+            tags = [
+                {'name': 'first'},
+                {'name': 'second'},
+                {'name': 'third'}
+            ]
+            return json.dumps(tags)
+        else:
+            pass
